@@ -50,10 +50,10 @@ agent-gate/
 
 ### Installation
 
-*Agent-Gate is currently under active development. Once released, you can install it globally via npm:*
+*Agent-Gate is now available on the global NPM registry! You can install it globally via npm:*
 
 ```bash
-npm install -g agent-gate
+npm install -g @parajulisandip0000/agent-gate
 ```
 
 ### Usage
@@ -69,15 +69,32 @@ This will:
 2. Inject the command shims into the agent's environment.
 3. Proxy API requests to track token usage.
 
-#### Manual Configuration
+#### Telemetry Dashboard
 
-If your agent runs as a daemon or background service, you can start the gate manually:
+To view a summary of your recent interceptions, API costs, and tokens burned, open a new terminal and run:
 
 ```bash
-agent-gate start
+agent-gate logs
 ```
 
-Then configure your agent to use the Agent-Gate proxy (default: `http://localhost:8080`) and ensure the shim directory is in its `PATH`.
+This will launch The Watchtower TUI dashboard showing a full timeline of the agent's actions.
+
+### IDE & Extension Monitoring (VS Code, Cursor, Codex)
+
+Because extensions run *inside* your editor rather than as standalone terminal scripts, you need to configure them slightly differently:
+
+#### 1. Intercepting Commands
+To force VS Code extensions (like GitHub Copilot or Continue) to use your guardrails, launch VS Code itself *through* Agent-Gate from your terminal:
+```bash
+agent-gate run -- code .
+```
+Every extension inside that VS Code window will now inherit your protected `PATH`. If an extension tries to run a background `npm install`, your terminal will prompt you for approval.
+
+#### 2. Tracking API Costs
+To track the tokens and costs of an AI extension, open the extension's settings inside your IDE and change its **API Base URL** to point to your local Agent-Gate proxy:
+`http://localhost:8080/v1`
+
+As soon as you do this, every line of code generated will be logged in your `agent-gate logs` dashboard with its exact token cost!
 
 ## Configuration
 
@@ -103,8 +120,8 @@ Create an `agent-gate.config.json` in your project root or `~/.agent-gate/`:
 
 We welcome contributions! Whether it's adding support for new agents, improving the TUI, or refining the token tracking algorithms, your help is appreciated.
 
-Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started.
+Please see our [CONTRIBUTING.md](https://github.com/Bytesphere-Solutions/Agent-Gate/blob/main/CONTRIBUTING.md) for details on how to get started.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Bytesphere-Solutions/Agent-Gate/blob/main/LICENSE) file for details.
