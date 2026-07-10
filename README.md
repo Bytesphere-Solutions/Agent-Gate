@@ -12,15 +12,15 @@ Developers and enterprises are terrified of AI agents running a rogue `rm -rf`, 
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-- 🚦 **Interactive Guardrails**: A beautiful Terminal UI (TUI) that asks for your explicit approval when an agent attempts a sensitive command (e.g., `git push`, `npm install`, `rm`).
-- 📊 **Agent Telemetry**: Logs exactly what the agent did in a clean, readable Markdown format and local SQLite database for later auditing.
-- 💰 **Cost & Token Tracker**: Intercepts API requests to track exactly how many tokens the local or API-based agent is burning per task, giving you a real-time view of your costs.
-- 🔌 **Universal Compatibility**: Works with any agent that uses standard system commands and HTTP APIs.
-- 🚀 **Zero-Config Setup**: Easy to install and run locally via `npm`.
+- **Interactive Guardrails**: A beautiful Terminal UI (TUI) that asks for your explicit approval when an agent attempts a sensitive command (e.g., `git push`, `npm install`, `rm`).
+- **Agent Telemetry**: Logs exactly what the agent did in a clean, readable Markdown format and local SQLite database for later auditing.
+- **Cost & Token Tracker**: Intercepts API requests to track exactly how many tokens the local or API-based agent is burning per task, giving you a real-time view of your costs.
+- **Universal Compatibility**: Works with any agent that uses standard system commands and HTTP APIs.
+- **Zero-Config Setup**: Easy to install and run locally via `npm`.
 
-## 🏗️ Architecture
+## Architecture
 
 Agent-Gate operates using three main components:
 
@@ -46,7 +46,7 @@ agent-gate/
 └── tests/                    # Unit and integration tests
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Installation
 
@@ -79,7 +79,7 @@ agent-gate start
 
 Then configure your agent to use the Agent-Gate proxy (default: `http://localhost:8080`) and ensure the shim directory is in its `PATH`.
 
-## 🛠️ Configuration
+## Configuration
 
 Agent-Gate is highly configurable. You can define rules for which commands require approval, which are auto-approved, and which are strictly denied.
 
@@ -99,7 +99,7 @@ Create an `agent-gate.config.json` in your project root or `~/.agent-gate/`:
 }
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Whether it's adding support for new agents, improving the TUI, or refining the token tracking algorithms, your help is appreciated.
 

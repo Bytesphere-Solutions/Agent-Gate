@@ -16,6 +16,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^26.1.1",
     "@typescript-eslint/eslint-plugin": "^8.63.0",
     "@typescript-eslint/parser": "^8.63.0",
@@ -27,6 +28,9 @@
   "dependencies": {
     "@clack/prompts": "^1.7.0",
     "commander": "^15.0.0",
-    "picocolors": "^1.1.1"
+    "express": "^5.2.1",
+    "http-proxy-middleware": "^4.2.0",
+    "picocolors": "^1.1.1",
+    "tiktoken": "^1.0.22"
   }
 }

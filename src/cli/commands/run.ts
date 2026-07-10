@@ -2,6 +2,7 @@ import { spawn } from 'child_process';
 import * as path from 'path';
 import { IpcServer, InterceptRequest, InterceptDecision } from '../../guard/ipc';
 import { GuardManager } from '../../guard/manager';
+import { ProxyServer } from '../../proxy/server';
 import { intro, outro, confirm, note, isCancel } from '@clack/prompts';
 import pc from 'picocolors';
 
@@ -22,11 +23,18 @@ export async function runCommand(agentCommand: string[]) {
   const riskyCommands = ['rm', 'git', 'npm', 'curl', 'wget'];
   const guard = new GuardManager(riskyCommands);
   const shimsDir = await guard.setup();
+
+  // 2.5 Setup API Proxy Server
+  const proxy = new ProxyServer();
+  const proxyPort = 8080; // Hardcoded for now, could be dynamic
+  await proxy.start(proxyPort);
+  note(`API Proxy listening on http://localhost:${proxyPort}`, 'Gate System');
   
-  // Clean up shims on exit
+  // Clean up on exit
   const cleanup = () => {
     guard.cleanup();
     ipc.stop();
+    proxy.stop();
   };
   process.on('SIGINT', () => { cleanup(); process.exit(0); });
   process.on('SIGTERM', () => { cleanup(); process.exit(0); });
@@ -73,7 +81,9 @@ export async function runCommand(agentCommand: string[]) {
     env: {
       ...process.env,
       PATH: newPath,
-      AGENT_GATE_IPC_PORT: port.toString()
+      AGENT_GATE_IPC_PORT: port.toString(),
+      OPENAI_BASE_URL: `http://localhost:${proxyPort}/v1`,
+      OPENAI_API_BASE: `http://localhost:${proxyPort}/v1`
     },
     shell: process.platform === 'win32'
   });
