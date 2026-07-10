@@ -1,15 +1,18 @@
 {
-  "name": "agent-gate",
+  "name": "@parajulisandip0000/agent-gate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "agent-gate": "./dist/index.js"
+    "agent-gate": "dist/index.js"
   },
   "keywords": [],
   "author": "",
