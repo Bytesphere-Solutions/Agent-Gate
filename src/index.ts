@@ -2,6 +2,7 @@
 
 import { Command } from 'commander';
 import { runCommand } from './cli/commands/run';
+import { logsCommand } from './cli/commands/logs';
 
 const program = new Command();
 
@@ -22,6 +23,16 @@ program
       args.shift();
     }
     runCommand(args).catch(err => {
+      console.error(err);
+      process.exit(1);
+    });
+  });
+
+program
+  .command('logs')
+  .description('View telemetry and intercept logs')
+  .action(() => {
+    logsCommand().catch(err => {
       console.error(err);
       process.exit(1);
     });

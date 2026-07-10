@@ -18,6 +18,7 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^26.1.1",
+    "@types/sqlite3": "^3.1.11",
     "@typescript-eslint/eslint-plugin": "^8.63.0",
     "@typescript-eslint/parser": "^8.63.0",
     "eslint": "^10.6.0",
@@ -31,6 +32,7 @@
     "express": "^5.2.1",
     "http-proxy-middleware": "^4.2.0",
     "picocolors": "^1.1.1",
+    "sqlite3": "^6.0.1",
     "tiktoken": "^1.0.22"
   }
 }

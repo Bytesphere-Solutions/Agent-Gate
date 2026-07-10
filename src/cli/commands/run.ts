@@ -3,6 +3,7 @@ import * as path from 'path';
 import { IpcServer, InterceptRequest, InterceptDecision } from '../../guard/ipc';
 import { GuardManager } from '../../guard/manager';
 import { ProxyServer } from '../../proxy/server';
+import { TelemetryDB } from '../../telemetry/db';
 import { intro, outro, confirm, note, isCancel } from '@clack/prompts';
 import pc from 'picocolors';
 
@@ -24,7 +25,8 @@ export async function runCommand(agentCommand: string[]) {
   const guard = new GuardManager(riskyCommands);
   const shimsDir = await guard.setup();
 
-  // 2.5 Setup API Proxy Server
+  // 2.5 Setup API Proxy Server & Telemetry
+  const db = new TelemetryDB();
   const proxy = new ProxyServer();
   const proxyPort = 8080; // Hardcoded for now, could be dynamic
   await proxy.start(proxyPort);
@@ -56,10 +58,12 @@ export async function runCommand(agentCommand: string[]) {
 
     if (isCancel(result)) {
       ipc.resolveIntercept(req.id, 'deny');
+      db.logInterception(req.id, req.command, req.args, req.cwd, 'deny');
       outro(pc.red('Execution denied by user.'));
     } else {
       const decision: InterceptDecision = result ? 'approve' : 'deny';
       ipc.resolveIntercept(req.id, decision);
+      db.logInterception(req.id, req.command, req.args, req.cwd, decision);
       
       if (decision === 'approve') {
         console.log(pc.green('✔ Execution approved.'));
