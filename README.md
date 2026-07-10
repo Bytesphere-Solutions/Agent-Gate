@@ -69,15 +69,15 @@ This will:
 2. Inject the command shims into the agent's environment.
 3. Proxy API requests to track token usage.
 
-#### Manual Configuration
+#### Telemetry Dashboard
 
-If your agent runs as a daemon or background service, you can start the gate manually:
+To view a summary of your recent interceptions, API costs, and tokens burned, open a new terminal and run:
 
 ```bash
-agent-gate start
+agent-gate logs
 ```
 
-Then configure your agent to use the Agent-Gate proxy (default: `http://localhost:8080`) and ensure the shim directory is in its `PATH`.
+This will launch The Watchtower TUI dashboard showing a full timeline of the agent's actions.
 
 ## Configuration
 
