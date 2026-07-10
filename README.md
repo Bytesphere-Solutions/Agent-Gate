@@ -103,8 +103,8 @@ Create an `agent-gate.config.json` in your project root or `~/.agent-gate/`:
 
 We welcome contributions! Whether it's adding support for new agents, improving the TUI, or refining the token tracking algorithms, your help is appreciated.
 
-Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started.
+Please see our [CONTRIBUTING.md](https://github.com/Bytesphere-Solutions/Agent-Gate/blob/main/CONTRIBUTING.md) for details on how to get started.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Bytesphere-Solutions/Agent-Gate/blob/main/LICENSE) file for details.
