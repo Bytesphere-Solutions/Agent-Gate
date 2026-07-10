@@ -1,6 +1,7 @@
 import express from 'express';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import { estimateTokens, estimateCost } from './tokens';
+import { TelemetryDB } from '../telemetry/db';
 import pc from 'picocolors';
 
 export class ProxyServer {
@@ -8,8 +9,10 @@ export class ProxyServer {
   private server: any;
   public totalTokens: number = 0;
   public totalCost: number = 0;
+  private db: TelemetryDB;
 
   constructor() {
+    this.db = new TelemetryDB();
     this.app.use(express.json({ limit: '10mb' }));
 
     // Proxy configuration for OpenAI-like endpoints
@@ -50,6 +53,8 @@ export class ProxyServer {
               const reqCost = estimateCost(inputTokens, outputTokens, model);
               this.totalTokens += (inputTokens + outputTokens);
               this.totalCost += reqCost;
+              
+              this.db.logApiCall(model, inputTokens, outputTokens, reqCost);
 
               console.log(
                 pc.dim('[Proxy]') + ' ' +

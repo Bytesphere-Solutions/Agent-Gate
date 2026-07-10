@@ -2,7 +2,7 @@
 
 First off, thank you for considering contributing to Agent-Gate! It's people like you that make Agent-Gate such a great tool for secure AI-driven development.
 
-## 🤝 How Can I Contribute?
+## How Can I Contribute?
 
 ### Reporting Bugs
 This section guides you through submitting a bug report for Agent-Gate.
@@ -20,7 +20,7 @@ This section guides you through submitting an enhancement suggestion.
 - Do not include issue numbers in the PR title.
 - Make sure your code passes the build (`npm run build`) and follows the styling guidelines.
 
-## 🛠️ Development Setup
+## Development Setup
 
 1. Fork the repo and clone it to your local machine.
 2. Run `npm install` to install all dependencies.
