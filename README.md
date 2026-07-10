@@ -79,6 +79,23 @@ agent-gate logs
 
 This will launch The Watchtower TUI dashboard showing a full timeline of the agent's actions.
 
+### IDE & Extension Monitoring (VS Code, Cursor, Codex)
+
+Because extensions run *inside* your editor rather than as standalone terminal scripts, you need to configure them slightly differently:
+
+#### 1. Intercepting Commands
+To force VS Code extensions (like GitHub Copilot or Continue) to use your guardrails, launch VS Code itself *through* Agent-Gate from your terminal:
+```bash
+agent-gate run -- code .
+```
+Every extension inside that VS Code window will now inherit your protected `PATH`. If an extension tries to run a background `npm install`, your terminal will prompt you for approval.
+
+#### 2. Tracking API Costs
+To track the tokens and costs of an AI extension, open the extension's settings inside your IDE and change its **API Base URL** to point to your local Agent-Gate proxy:
+`http://localhost:8080/v1`
+
+As soon as you do this, every line of code generated will be logged in your `agent-gate logs` dashboard with its exact token cost!
+
 ## Configuration
 
 Agent-Gate is highly configurable. You can define rules for which commands require approval, which are auto-approved, and which are strictly denied.
