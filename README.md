@@ -50,10 +50,10 @@ agent-gate/
 
 ### Installation
 
-*Agent-Gate is currently under active development. Once released, you can install it globally via npm:*
+*Agent-Gate is now available on the global NPM registry! You can install it globally via npm:*
 
 ```bash
-npm install -g agent-gate
+npm install -g @parajulisandip0000/agent-gate
 ```
 
 ### Usage
